@@ -1,0 +1,1 @@
+extends: "@semantic-release/tochka-gitlab-config"

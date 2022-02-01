@@ -1,0 +1,29 @@
+include:
+  - project: "ie-it/dev/gitlab-ci"
+    ref: "master"
+    file: "/template.yml"
+
+services:
+  - registry.tech.bank24.int/hr-it/postgres:11
+variables:
+  "APP_DB_DSN": "postgresql://huntflow:huntflow@postgres:5432/huntflow"
+  POSTGRES_DB: "huntflow"
+  POSTGRES_USER: "huntflow"
+  POSTGRES_PASSWORD: "huntflow"
+  IMAGE: "hr-it/huntflow-candidates"
+  SERVICE: "huntflow"
+  APPLICATION: "candidates"
+  HELM_CHART_VERSION: "5.x"
+
+quality:
+  services:
+    - name: registry.tech.bank24.int/hr-it/postgres:11
+      alias: postgres
+
+  script:
+    - isort --check-only app/
+    - autopep8 --max-line-length=120 --diff --recursive --exit-code app/
+    - unify --recursive --check-only app/
+    - flake8 --jobs 4 --statistics --show-source --config ./setup.cfg app/ ./tests/
+    - mypy --config-file ./setup.cfg app/
+    - pytest

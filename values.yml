@@ -1,0 +1,32 @@
+serviceName: "$SERVICE"
+chartVersion: "$HELM_CHART_VERSION"
+deploymentType: single
+applications:
+  candidates:
+    parameters:
+      whiteIPs: default
+    replicas: 1
+    vaultSecrets:
+      mount: /var/run/secrets/app
+      secrets:
+        - vaultPath: candidates
+    initContainers:
+      migrate:
+        image: *sensored*
+        imageTag: "$VERSION"
+        imagePullPolicy: Always
+        resources:
+          limits: { memory: "256Mi", cpu: "0.5" }
+          requests: { memory: "128Mi", cpu: "0.01" }
+        args:
+          - "alembic"
+          - "upgrade"
+          - "head"
+    containers:
+      candidates:
+        image: *sensored*
+        imageTag: "$VERSION"
+        imagePullPolicy: Always
+        resources:
+          limits: {memory: "128Mi", cpu: "1"}
+          requests: {memory: "64Mi", cpu: "0.2"}

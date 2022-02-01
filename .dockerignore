@@ -1,0 +1,10 @@
+.env
+.git/
+.venv/
+.idea/
+.vscode/
+.vim/
+**/__pycache__/
+**/.cache/
+**/.pytest_cache/
+**/.mypy_cache/

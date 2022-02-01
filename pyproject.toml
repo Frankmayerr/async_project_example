@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "huntflow-candidates"
+version = "0.1.0"
+description = ""
+authors = ["ygladkix <y.gladkix@tochka.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+asyncio = "^3.4.3"
+aiohttp = "^3.7.3"
+bus = {git = "*sensored*", rev = "master"}
+environs = "^7.3.1"
+sentry-sdk = "^0.19.5"
+chassis = {version = "^1.6.1", source = "gitlab"}
+databases = "^0.4.3"
+alembic = "^1.5.8"
+apscheduler = "^3.7.0"
+asyncpg = "^0.22.0"
+psycopg2-binary = "^2.8.6"
+tenacity = "^7.0.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+mypy = "^0.800"
+flake8 = "^3.8.4"
+isort = "^5.8.0"
+yapf = "^0.30.0"
+autopep8 = "^1.5.4"
+pytest-cov = "^2.11.1"
+unify = "^0.5"
+mock = "^4.0.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[[tool.poetry.source]]
+name = "tochka"
+url = "*sensored*"
+default = true
+
+[[tool.poetry.source]]
+name = "gitlab"
+url = "*sensored*"
+default = false
+

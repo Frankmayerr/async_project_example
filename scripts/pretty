@@ -1,0 +1,6 @@
+#!/bin/bash
+set -ex
+
+isort --overwrite-in-place app
+autopep8 --max-line-length=120 --in-place --recursive app
+unify --recursive --in-place app
